@@ -1,0 +1,28 @@
+ <ion-view view-title="Laboratorio clinico unlab" ng-controller="LoginController">
+    <ion-content>
+      	<div class="item item-body">
+    		<img class="full-image" src="img/logo.png">
+		</div>
+		<div class="list">
+		  <label class="item item-input">
+		  	<i class="icon ion-person placeholder-icon"></i>
+		    <input type="text" placeholder="Correo electronico">
+		  </label>
+		  <label class="item item-input ">
+		  <i class="icon ion-key placeholder-icon"></i>
+		    <input type="password" placeholder="Contraseña">
+		  </label>
+		  <div class="padding">
+				<button class="button button-block button-positive " >Iniciar sesión</button>
+		 </div>
+		</div>
+
+		<div class="list">
+			<div class="padding">
+				<button class="button button-block button-calm icon ion-social-facebook-outline icon-left" ng-click="facebookLogin()">Inicia sesión con facebook</button>
+				<button class="button button-block button-assertive icon ion-social-googleplus icon-left" >Inicia sesión con google</button>
+		 	</div>
+		</div>
+
+    </ion-content>
+  </ion-view>
