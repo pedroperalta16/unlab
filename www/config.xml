@@ -6,7 +6,7 @@
     mlns="http://www.w3.org/ns/widgets"
     xmlns:gap="http://phonegap.com/ns/1.0">
 
-  <name>unlab_project</name>
+  <name>Unlab</name>
   <description>
        Consulting clinic results
     </description>
@@ -48,7 +48,7 @@
     <splash src="resources/android/splash/drawable-port-xxhdpi-screen.png" density="port-xxhdpi"/>
     <splash src="resources/android/splash/drawable-port-xxxhdpi-screen.png" density="port-xxxhdpi"/>
   </platform>
-  
+
 <gap:plugin name="cordova-plugin-inappbrowser"/>
 
 <platform name="ios" />
