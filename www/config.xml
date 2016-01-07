@@ -26,13 +26,7 @@
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
 
-<gap:plugin name="cordova-plugin-console"/>
-<gap:plugin name="cordova-plugin-device"/>
 <gap:plugin name="cordova-plugin-inappbrowser"/>
-<gap:plugin name="cordova-plugin-splashscreen"/>
-<gap:plugin name="cordova-plugin-statusbar"/>
-<gap:plugin name="cordova-plugin-whitelist"/>
-<gap:plugin name="ionic-plugin-keyboard"/>
 
 <platform name="ios" />
 <platform name="android" />
