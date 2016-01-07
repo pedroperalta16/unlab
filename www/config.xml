@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<widget 
+    id="com.vinfo.unlab"
+    version="0.0.1"
+    versionCode="1"
+    mlns="http://www.w3.org/ns/widgets"
+    xmlns:gap="http://phonegap.com/ns/1.0">
+
+  <name>unlab_project</name>
+  <description>
+       Consulting clinic results
+    </description>
+  <author email="andresa58@gmail.com" href="http://vinfoweb.com/">
+      Andres Arbelaez Acevedo
+    </author>
+  <content src="index.html"/>
+  <access origin="*"/>
+
+  <preference name="webviewbounce" value="false"/>
+  <preference name="UIWebViewBounce" value="false"/>
+  <preference name="DisallowOverscroll" value="true"/>
+  <preference name="android-minSdkVersion" value="16"/>
+  <preference name="BackupWebStorage" value="none"/>
+
+  <feature name="StatusBar">
+    <param name="ios-package" value="CDVStatusBar" onload="true"/>
+  </feature>
+
+<gap:plugin name="cordova-plugin-console"/>
+<gap:plugin name="cordova-plugin-device"/>
+<gap:plugin name="cordova-plugin-inappbrowser"/>
+<gap:plugin name="cordova-plugin-splashscreen"/>
+<gap:plugin name="cordova-plugin-statusbar"/>
+<gap:plugin name="cordova-plugin-whitelist"/>
+<gap:plugin name="ionic-plugin-keyboard"/>
+
+<platform name="ios" />
+<platform name="android" />
+<platform name="winphone" />
+
+</widget>
