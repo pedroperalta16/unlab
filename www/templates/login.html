@@ -6,15 +6,16 @@
 		<div class="list">
 		  <label class="item item-input">
 		  	<i class="icon ion-person placeholder-icon"></i>
-		    <input type="text" placeholder="Correo electronico">
+		    <input type="text" name="email" placeholder="Correo electronico" ng-model="formData.email" value="">
 		  </label>
 		  <label class="item item-input ">
 		  <i class="icon ion-key placeholder-icon"></i>
-		    <input type="password" placeholder="Contraseña">
+		    <input type="password" name="password" placeholder="Contraseña" ng-model="formData.password" value="">
 		  </label>
+		  <span ng-if="hasError==true" class="assertive">{{error}}</span>
 		  <div class="padding">
-				<button class="button button-block button-positive " >Iniciar sesión</button>
-		 </div>
+				<button class="button button-block button-positive" ng-click="login()">Iniciar sesión</button>
+		  </div>
 		</div>
 
 		<div class="list">

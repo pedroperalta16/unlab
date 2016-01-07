@@ -1,34 +1,102 @@
 'use strict';
 (function(){
 
-  var app=angular.module('unlab', ['ionic','ngCordovaOauth']);
+  var app=angular.module('unlab', ['ionic','task','ngCordovaOauth','ngResource']);
+  var resourceEndPoint="http://localhost/unlab/"
 
 
-  app.config(function($stateProvider,$urlRouterProvider){
+
+  app.config(function($stateProvider,$urlRouterProvider,$resourceProvider){
 
     $stateProvider.state('login',{
       url:'/login',
       templateUrl:'templates/login.html'
 
     });
+    $stateProvider.state('home',{
+      url:'/home',
+      templateUrl:'templates/home.html'
+
+    });
 
 
     $urlRouterProvider.otherwise('/login');
+    $resourceProvider.defaults.stripTrailingSlashes = false;
 
   });
 
    /*
     *controladro para autenticar el usuario  en el sistema
     */
-  app.controller('LoginController',function($scope,$cordovaOauth,$location,$ionicLoading){
+  app.controller('LoginController',function($scope,
+                                            $cordovaOauth,
+                                            $ionicLoading,
+                                            $resource,
+                                            $ionicPopup,
+                                            $http,
+                                            $state,
+                                            Task){
+
+    $scope.hasError=false;
+    $scope.error='';
+    $scope.formData={email:'',password:''}
+
+    /*regular login*/
+    $scope.login=function(){
+      
+
+      if($scope.email!=""){
+
+        if(!Task.validEmail($scope.formData.email)){
+
+          $scope.hasError=true;
+          $scope.error='Por favor ingrese un correo electronico valido!';
+          return;
+        }
+
+      }
+      $scope.hasError=false;
+      $scope.error='';
+
+      if ($scope.formData.email ==""||$scope.formData.password=="" ){
+          $scope.hasError=true;
+          $scope.error='Por favor ingrese un correo electronico! , Por favor ingrese una contraseña!';
+          return;
+      }
+      $scope.hasError=false;
+      $scope.error='';
+
+      $ionicLoading.show({
+              template: 'Cargando...'
+            });
+
+      $.post(resourceEndPoint+"api/sigin",{email:$scope.formData.email,password:$scope.formData.password},function(res){
+                    $ionicLoading.hide();
+                     localStorage.setItem("id", res.userdata.id);
+                     localStorage.setItem("name",  res.userdata.name);
+                     localStorage.setItem("lastname",  res.userdata.lastname);
+                     localStorage.setItem("email",  res.userdata.email);
+                     localStorage.setItem("img",  res.userdata.image);
+                     localStorage.setItem("logged_in", true);
+                     localStorage.setItem("token", res.token.token);
+                    $state.go('home');
+
+         }).fail(function(){
+             $ionicPopup.alert({
+                 title: 'Fallo autenticación!',
+                 template: 'Compruebe los datos de acceso y vuelva a intentarlo'
+            });
+           $ionicLoading.hide();
+         });
+                
+    }/*end regular login*/
+
     
     /*login con facebook*/
   $scope.facebookLogin = function() {
     document.addEventListener("deviceready", function () {
 
          $cordovaOauth.facebook("1687504901530092", ["email","public_profile"]).then(function(result) {
-            
-           //navigator.notification.activityStart('Espere por favor','Cargando'); 
            $ionicLoading.show({
               template: 'Cargando...'
             });
@@ -44,26 +112,24 @@
               };
 
               $.post(endpoint+"api/mobile/socialLogin",{data:login},function(res){
-                     
-                     //navigator.notification.activityStop(); 
+
                      $ionicLoading.hide();
+                     localStorage.setItem("id", res.userdata.id);
+                     localStorage.setItem("name",  res.userdata.name);
+                     localStorage.setItem("lastname",  res.userdata.lastname);
+                     localStorage.setItem("email",  res.userdata.email);
+                     localStorage.setItem("img",  res.userdata.image);
+                     localStorage.setItem("logged_in", true);
+                     localStorage.setItem("token", res.token.token);
+                     $state.go('home');
 
-                         if(res.status=="ok"){
-
-                               localStorage.setItem("id", res.data.id);
-                               localStorage.setItem("name",  res.data.name);
-                               localStorage.setItem("lastname",  res.data.lastname);
-                               localStorage.setItem("correo",  res.data.correo);
-                               localStorage.setItem("logged_in",  res.data.id);
-
-                               
-                               $location.path('/'+res.redirect);
-
-                         }else{
-                           alert("Ha ocurrido un error, vuelve a intentarlo mas tarde");
-                           
-                         }
-               });
+               }).fail(function(){
+                     $ionicPopup.alert({
+                         title: 'Fallo autenticación!',
+                         template: 'Compruebe los datos de acceso y vuelva a intentarlo'
+                    });
+                   $ionicLoading.hide();
+             });
             
 
               }, function(error) {
@@ -102,26 +168,23 @@
 
                 $.post(endpoint+"api/mobile/socialLogin",{data:login},function(res){
                         
-                        //navigator.notification.activityStop(); 
-                         $ionicLoading.hide();
-                       
+                        $ionicLoading.hide();
+                        localStorage.setItem("id", res.userdata.id);
+                        localStorage.setItem("name",  res.userdata.name);
+                        localStorage.setItem("lastname",  res.userdata.lastname);
+                        localStorage.setItem("email",  res.userdata.email);
+                        localStorage.setItem("img",  res.userdata.image);
+                        localStorage.setItem("logged_in", true);
+                        localStorage.setItem("token", res.token.token);
+                        $state.go('home');
 
-                            if(res.status=="ok"){
-
-                                   localStorage.setItem("id", res.data.id);
-                                   localStorage.setItem("name",  res.data.name);
-                                   localStorage.setItem("lastname",  res.data.lastname);
-                                   localStorage.setItem("correo",  res.data.correo);
-                                   localStorage.setItem("logged_in",  res.data.id);
-
-                                  
-                                  $location.path('/'+res.redirect);
-
-                            }else{
-                              alert("Ha ocurrido un error, vuelve a intentarlo mas tarde");
-                              
-                            }
-                  });
+                  }).fail(function(){
+                       $ionicPopup.alert({
+                           title: 'Fallo autenticación!',
+                           template: 'Compruebe los datos de acceso y vuelva a intentarlo'
+                      });
+                     $ionicLoading.hide();
+                 });
                 
              
  
@@ -137,8 +200,16 @@
 
   }/*end login google*/
 
+});/*end login controller*/
 
-  });
+app.controller('HomeController',function($scope,$ionicSlideBoxDelegate){
+ $scope.nextSlide = function() {
+    $ionicSlideBoxDelegate.next();
+  }
+  $scope.prevSlide =function(){
+    $ionicSlideBoxDelegate.previous();
+  }
+})
 
     app.run(function($ionicPlatform) {
       $ionicPlatform.ready(function() {
