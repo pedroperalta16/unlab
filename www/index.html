@@ -20,9 +20,13 @@
   <body ng-app="unlab">
 
     <ion-pane>
-        <ion-nav-bar class="bar-stable">
-            <ion-nav-back-button>Volver</ion-nav-back-button>
-        </ion-nav-bar>
+        <ion-header-bar class="bar-positive">
+             
+              <h1 class="title">UNLAB</h1>
+              <div class="buttons">
+                <button class="button button-assertive" ng-click="logout.logout();" ng-show="hideLogout">Cerrar sesión</button>
+              </div>
+            </ion-header-bar>
         <ion-nav-view></ion-nav-view>
     </ion-pane>
 

@@ -37,6 +37,7 @@
                                             $state,
                                             Task,Session){
     Session.isLoggin();
+    console.log((null == localStorage.getItem("token")))
 
     $scope.hasError=false;
     $scope.error='';
@@ -206,13 +207,18 @@
 app.controller('HomeController',function($scope,$ionicSlideBoxDelegate,$http,Session){
 
 Session.isLoggin();
-$scope.base_url=resourceEndPoint+'assets/media/gallery/';
+$scope.base_url=resourceEndPoint;
+$scope.galleryFolder='';
 $scope.slides=[];
+$scope.news=[];
+$scope.pageNews=0;
+$scope.hasNews=true;
+
 
 /*cargar los  sliders*/
 $http.get(resourceEndPoint+'api/gallery/active/?token='+localStorage['token']).success(function(res){
 
-  $scope.base_url+=res.gallery.id+'/medium/'
+  $scope.galleryFolder=res.gallery.id;
   $scope.slides=res.items;
 
 
@@ -222,18 +228,44 @@ $http.get(resourceEndPoint+'api/gallery/active/?token='+localStorage['token']).s
           template: 'Fallo al cargar los sliders'
     });
 });
+$scope.navSlide = function(index) {
+        $ionicSlideBoxDelegate.slide(index, 500);
+}
 
+/*cargar los noticias*/
+$http.get(resourceEndPoint+'api/news/?token='+localStorage['token']+'&page='+$scope.pageNews).success(function(res){
 
+  $scope.news=res;
 
- $scope.nextSlide = function() {
-    $ionicSlideBoxDelegate.next();
-  }
-  $scope.prevSlide =function(){
-    $ionicSlideBoxDelegate.previous();
-  }
-})
+}).error(function(){
+    $scope.hasNews=false;
 
-    app.run(function($ionicPlatform) {
+   $ionicPopup.alert({
+          title: 'Fallo!',
+          template: 'Fallo al cargar los sliders'
+    });
+});
+
+  $scope.loadMore = function() {
+    $scope.pageNews++;
+    
+      $http.get(resourceEndPoint+'api/news/?token='+localStorage['token']+'&page='+$scope.pageNews++).success(function(items) {
+       
+          
+          angular.forEach(items,function(v){
+              $scope.news.push(v);
+          });
+
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+      }).error(function(){
+           $scope.hasNews=false;
+      });
+
+    };
+
+});
+
+    app.run(function($ionicPlatform,$rootScope,Session) {
       $ionicPlatform.ready(function() {
         if(window.cordova && window.cordova.plugins.Keyboard) {
           cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -249,6 +281,9 @@ $http.get(resourceEndPoint+'api/gallery/active/?token='+localStorage['token']).s
         if(window.StatusBar) {
           StatusBar.styleDefault();
         }
+
+        /*load global logout function*/
+       $rootScope.logout=Session;
 
       });
     });
