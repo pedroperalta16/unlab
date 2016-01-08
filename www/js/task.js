@@ -13,6 +13,31 @@ task.factory('Task',function(){
 		}
 	}
 
-});	
+});	/*end task*/
+
+task.factory('Session',function($state,$ionicHistory){
+
+	return {
+
+		isLoggin:function(){
+			console.log($ionicHistory.currentView().stateName)
+
+			 if (localStorage.getItem("token") === null) {
+          		$state.go('login');
+        	 }else{
+        	 	if ($ionicHistory.currentView().stateName="login") {
+        	 		$state.go('home');
+        	 	};
+        	 }
+
+		},
+		logout:function(){
+			localStorage.clear();
+      		localStorage.removeItem('token');
+      		$state.go('login');
+		}
+	}
+
+});
 
 }());

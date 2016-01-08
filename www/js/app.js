@@ -35,7 +35,8 @@
                                             $ionicPopup,
                                             $http,
                                             $state,
-                                            Task){
+                                            Task,Session){
+    Session.isLoggin();
 
     $scope.hasError=false;
     $scope.error='';
@@ -202,7 +203,28 @@
 
 });/*end login controller*/
 
-app.controller('HomeController',function($scope,$ionicSlideBoxDelegate){
+app.controller('HomeController',function($scope,$ionicSlideBoxDelegate,$http,Session){
+
+Session.isLoggin();
+$scope.base_url=resourceEndPoint+'assets/media/gallery/';
+$scope.slides=[];
+
+/*cargar los  sliders*/
+$http.get(resourceEndPoint+'api/gallery/active/?token='+localStorage['token']).success(function(res){
+
+  $scope.base_url+=res.gallery.id+'/medium/'
+  $scope.slides=res.items;
+
+
+}).error(function(){
+   $ionicPopup.alert({
+          title: 'Fallo!',
+          template: 'Fallo al cargar los sliders'
+    });
+});
+
+
+
  $scope.nextSlide = function() {
     $ionicSlideBoxDelegate.next();
   }
@@ -227,6 +249,7 @@ app.controller('HomeController',function($scope,$ionicSlideBoxDelegate){
         if(window.StatusBar) {
           StatusBar.styleDefault();
         }
+
       });
     });
 
