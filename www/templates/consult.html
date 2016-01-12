@@ -1,0 +1,22 @@
+ <ion-view view-title="Laboratorio clinico unlab" ng-controller="ConsultController">
+    <ion-content class="has-header">
+      	<div class="item item-body tcenter">
+    		<h2>CONSULTA TUS RESUTADOS</h2>
+		</div>
+		<div class="list">
+		  <label class="item item-input">
+		  	<i class="icon ion-person placeholder-icon"></i>
+		    <input type="text" name="number" placeholder="Numero de identificacion" ng-model="formData.number" value="">
+		  </label>
+		  <label class="item item-input ">
+		  <i class="icon ion-key placeholder-icon"></i>
+		    <input type="password" name="password" placeholder="Contraseña" ng-model="formData.password" value="">
+		  </label>
+		  <span ng-if="hasError==true" class="assertive">{{error}}</span>
+		  <div class="padding">
+				<button class="button button-block button-positive" ng-click="login()">Consultar</button>
+		  </div>
+		</div>
+
+    </ion-content>
+  </ion-view>

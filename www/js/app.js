@@ -11,17 +11,18 @@
     $stateProvider.state('login',{
       url:'/login',
       templateUrl:'templates/login.html'
-
     });
     $stateProvider.state('home',{
       url:'/home',
       templateUrl:'templates/home.html'
-
     });
     $stateProvider.state('news_detail',{
       url:'/news-detail/:id',
       templateUrl:'templates/news.html'
-
+    });
+    $stateProvider.state('consult',{
+      url:'/consult',
+      templateUrl:'templates/consult.html'
     });
 
 
@@ -272,23 +273,30 @@ $http.get(resourceEndPoint+'api/news/?token='+localStorage['token']+'&page='+$sc
 /*controlador de noticias*/
 app.controller('NewsController',function($scope,$state,$http,$sce){
 
-  var id =$state.params.id;
-  $scope.base_url =resourceEndPoint;
+    var id =$state.params.id;
+    $scope.base_url =resourceEndPoint;
 
-  /*cargar noticia especifica*/
-  $http.get(resourceEndPoint+'api/news/'+id+'/?token='+localStorage['token']).success(function(res){
+    /*cargar noticia especifica*/
+    $http.get(resourceEndPoint+'api/news/'+id+'/?token='+localStorage['token']).success(function(res){
 
-  $scope.news=res;
-  $scope.thisCanBeusedInsideNgBindHtml = $sce.trustAsHtml($scope.news.content);
+    $scope.news=res;
+    $scope.thisCanBeusedInsideNgBindHtml = $sce.trustAsHtml($scope.news.content);
 
-}).error(function(){
-    $scope.hasNews=false;
+  }).error(function(){
+      $scope.hasNews=false;
 
-   $ionicPopup.alert({
-          title: 'Fallo!',
-          template: 'Fallo al cargar los sliders'
-    });
+     $ionicPopup.alert({
+            title: 'Fallo!',
+            template: 'Fallo al cargar los sliders'
+      });
+  });
+
 });
+/*consultar resultados del laboratorio*/
+app.controller("ConsultController",function($scope,$http){
+ $scope.formData={number:'',password:''}
+ $scope.hasError=false;
+ $scope.error='';
 
 });
 

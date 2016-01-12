@@ -40,11 +40,10 @@ task.factory('Session',function($state,$ionicHistory){
 		},
 		showBarButtons:function(){
 
-			if ($ionicHistory.currentView().stateName=="login") {
-				return false;
-			}else{
-				return true;
-			}
+			if ($ionicHistory.currentView().stateName=="login")
+					return false;
+			
+			return true;
 		}
 	}
 
