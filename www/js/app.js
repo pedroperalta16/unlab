@@ -1,7 +1,7 @@
 'use strict';
 (function(){
 
-  var app=angular.module('unlab', ['ionic','task','ngCordovaOauth','ngResource']);
+  var app=angular.module('unlab', ['ionic','task','ngCordovaOauth','ngResource','ngSanitize']);
   var resourceEndPoint="http://localhost/unlab/"
 
 
@@ -16,6 +16,11 @@
     $stateProvider.state('home',{
       url:'/home',
       templateUrl:'templates/home.html'
+
+    });
+    $stateProvider.state('news_detail',{
+      url:'/news-detail/:id',
+      templateUrl:'templates/news.html'
 
     });
 
@@ -37,8 +42,8 @@
                                             $state,
                                             Task,Session){
     Session.isLoggin();
-    console.log((null == localStorage.getItem("token")))
 
+    $scope.hideLogout=false;
     $scope.hasError=false;
     $scope.error='';
     $scope.formData={email:'',password:''}
@@ -262,6 +267,28 @@ $http.get(resourceEndPoint+'api/news/?token='+localStorage['token']+'&page='+$sc
       });
 
     };
+
+});
+/*controlador de noticias*/
+app.controller('NewsController',function($scope,$state,$http,$sce){
+
+  var id =$state.params.id;
+  $scope.base_url =resourceEndPoint;
+
+  /*cargar noticia especifica*/
+  $http.get(resourceEndPoint+'api/news/'+id+'/?token='+localStorage['token']).success(function(res){
+
+  $scope.news=res;
+  $scope.thisCanBeusedInsideNgBindHtml = $sce.trustAsHtml($scope.news.content);
+
+}).error(function(){
+    $scope.hasNews=false;
+
+   $ionicPopup.alert({
+          title: 'Fallo!',
+          template: 'Fallo al cargar los sliders'
+    });
+});
 
 });
 
