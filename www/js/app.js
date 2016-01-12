@@ -43,7 +43,7 @@
                                             Task,Session){
     Session.isLoggin();
 
-    $scope.hideLogout=false;
+    
     $scope.hasError=false;
     $scope.error='';
     $scope.formData={email:'',password:''}
@@ -310,7 +310,7 @@ app.controller('NewsController',function($scope,$state,$http,$sce){
         }
 
         /*load global logout function*/
-       $rootScope.logout=Session;
+       $rootScope.task=Session;
 
       });
     });

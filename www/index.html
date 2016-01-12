@@ -21,16 +21,19 @@
   <body ng-app="unlab">
 
     <ion-pane>
-        <ion-header-bar class="bar-positive">
-             
+      
+        <div class="bar bar-header bar-calm">
+           <div class="buttons" ng-if="task.showBarButtons()">
+              <button class="button icon ion-chevron-left" ng-click="task.doBack()">&nbsp;</button>
+           </div>
               <h1 class="title">UNLAB</h1>
-              <div class="buttons">
-                <button class="button button-assertive" ng-click="logout.logout();" ng-show="hideLogout">Cerrar sesión</button>
-              </div>
-            </ion-header-bar>
+            <div class="buttons" ng-if="task.showBarButtons()">
+                 <button class="button button-assertive" ng-click="task.logout();" >Cerrar sesión</button>
+            </div>
+        </div>
         <ion-nav-view></ion-nav-view>
 
-        <div class="tabs tabs-icon-top" >
+        <div class="tabs tabs-icon-top" ng-show="hideLogout">
             <a class="tab-item">
               <i class="icon ion-briefcase"></i>
               Nosotros
