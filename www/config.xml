@@ -28,6 +28,18 @@
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
 
+  <feature name="SocialSharing">
+    <param name="ios-package" value="SocialSharing" />
+  </feature>
+
+  <feature name="SocialSharing">
+    <param name="android-package" value="nl.xservices.plugins.SocialSharing" />
+  </feature>
+
+  <feature name="SocialSharing">
+    <param name="wp-package" value="SocialSharing"/>
+  </feature>
+
 <platform name="android">
     <icon src="resources/android/icon/drawable-ldpi-icon.png" density="ldpi"/>
     <icon src="resources/android/icon/drawable-mdpi-icon.png" density="mdpi"/>
@@ -50,6 +62,7 @@
   </platform>
 
 <gap:plugin name="cordova-plugin-inappbrowser"/>
+<gap:plugin name="cordova-plugin-x-socialsharing" source="npm" />
 
 <platform name="ios" />
 <platform name="android" />
