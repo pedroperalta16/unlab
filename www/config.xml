@@ -64,6 +64,10 @@
 <gap:plugin name="cordova-plugin-inappbrowser"/>
 <gap:plugin name="cordova-plugin-x-socialsharing" source="npm" />
 
+<gap:config-file platform="android" parent="/manifest">
+     <application android:debuggable="true" />
+</gap:config-file>
+
 <platform name="ios" />
 <platform name="android" />
 <platform name="winphone" />
