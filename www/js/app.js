@@ -87,10 +87,10 @@
                      localStorage.setItem("token", res.token.token);
                     $state.go('home');
 
-         }).fail(function(){
+         }).fail(function(error){
              $ionicPopup.alert({
                  title: 'Fallo autenticación!',
-                 template: 'Compruebe los datos de acceso y vuelva a intentarlo'
+                 template: 'Compruebe los datos de acceso y vuelva a intentarlo'+angular.toJson(error,true)
             });
            $ionicLoading.hide();
          });
@@ -142,10 +142,12 @@
               }, function(error) {
 
                   alert("Ha ocurrido un error inesperado, vuelve a intentarlo mas tarde, error("+angular.toJson(error,true)+")");
+                  $ionicLoading.hide();
               });
 
           }, function(error) {
              alert("Ha ocurrido un error inesperado, vuelve a intentarlo mas tarde, error("+angular.toJson(error,true)+")");
+             $ionicLoading.hide();
         });
 
      },false);
@@ -198,10 +200,12 @@
  
               }, function(error) {
                   alert("Ha ocurrido un error inesperado, vuelve a intentarlo mas tarde, error("+angular.toJson(error,true)+")");
+                  $ionicLoading.hide();
               });
 
           }, function(error) {
              alert("Ha ocurrido un error inesperado, vuelve a intentarlo mas tarde, error("+angular.toJson(error,true)+")");
+             $ionicLoading.hide();
         });
 
      },false);
