@@ -2,7 +2,7 @@
 (function(){
 
   var app=angular.module('unlab', ['ionic','task','ngCordovaOauth','ngResource','ngSanitize']);
-  var resourceEndPoint="http://localhost/unlab/"
+  var resourceEndPoint="http://appunlab.comtic.co/"
 
 
 
@@ -119,7 +119,7 @@
                 'email': result.data.email
               };
 
-              $.post(endpoint+"api/mobile/socialLogin",{data:login},function(res){
+              $.post(resourceEndPoint+"api/social/sigin",{data:login},function(res){
 
                      $ionicLoading.hide();
                      localStorage.setItem("id", res.userdata.id);
@@ -174,7 +174,7 @@
                   };
               
 
-                $.post(endpoint+"api/mobile/socialLogin",{data:login},function(res){
+                $.post(resourceEndPoint+"api/social/sigin",{data:login},function(res){
                         
                         $ionicLoading.hide();
                         localStorage.setItem("id", res.userdata.id);

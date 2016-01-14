@@ -39,8 +39,7 @@ task.factory('Session',function($state,$ionicHistory){
 			$ionicHistory.goBack();
 		},
 		showBarButtons:function(){
-
-			if ($ionicHistory.currentView().stateName=="login")
+			if ($ionicHistory.currentView().stateName =="login")
 					return false;
 			
 			return true;
