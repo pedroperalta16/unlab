@@ -141,11 +141,11 @@
 
               }, function(error) {
 
-                  alert("Ha ocurrido un error inesperado, vuelve a intentarlo mas tarde, error("+error+")");
+                  alert("Ha ocurrido un error inesperado, vuelve a intentarlo mas tarde, error("+angular.toJson(error,true)+")");
               });
 
           }, function(error) {
-             alert("Ha ocurrido un error inesperado, vuelve a intentarlo mas tarde, error("+error+")");
+             alert("Ha ocurrido un error inesperado, vuelve a intentarlo mas tarde, error("+angular.toJson(error,true)+")");
         });
 
      },false);
@@ -197,11 +197,11 @@
              
  
               }, function(error) {
-                  alert("Ha ocurrido un error inesperado, vuelve a intentarlo mas tarde, error("+error+")");
+                  alert("Ha ocurrido un error inesperado, vuelve a intentarlo mas tarde, error("+angular.toJson(error,true)+")");
               });
 
           }, function(error) {
-             alert("Ha ocurrido un error inesperado, vuelve a intentarlo mas tarde, error("+error+")");
+             alert("Ha ocurrido un error inesperado, vuelve a intentarlo mas tarde, error("+angular.toJson(error,true)+")");
         });
 
      },false);
