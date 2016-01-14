@@ -1,12 +1,12 @@
 'use strict';
 (function(){
 
-  var app=angular.module('unlab', ['ionic','task','ngCordovaOauth','ngResource','ngSanitize']);
+  var app=angular.module('unlab', ['ionic','task','ngCordovaOauth','ngSanitize']);
   var resourceEndPoint="http://appunlab.comtic.co/"
 
 
 
-  app.config(function($stateProvider,$urlRouterProvider,$resourceProvider){
+  app.config(function($stateProvider,$urlRouterProvider){
 
     $stateProvider.state('login',{
       url:'/login',
@@ -27,7 +27,6 @@
 
 
     $urlRouterProvider.otherwise('/login');
-    $resourceProvider.defaults.stripTrailingSlashes = false;
 
   });
 
@@ -37,7 +36,6 @@
   app.controller('LoginController',function($scope,
                                             $cordovaOauth,
                                             $ionicLoading,
-                                            $resource,
                                             $ionicPopup,
                                             $http,
                                             $state,
@@ -118,6 +116,7 @@
                 'lastName' : result.data.last_name,
                 'email': result.data.email
               };
+              alert(angular.toJson(login,true));
 
               $.post(resourceEndPoint+"api/social/sigin",{data:login},function(res){
 
@@ -301,6 +300,7 @@ app.controller("ConsultController",function($scope,$http){
 });
 
     app.run(function($ionicPlatform,$rootScope,Session) {
+
       $ionicPlatform.ready(function() {
         if(window.cordova && window.cordova.plugins.Keyboard) {
           cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -318,7 +318,7 @@ app.controller("ConsultController",function($scope,$http){
         }
 
         /*load global logout function*/
-       $rootScope.task=Session;
+            $rootScope.task=Session;
 
       });
     });
