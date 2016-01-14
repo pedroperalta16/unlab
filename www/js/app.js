@@ -140,11 +140,12 @@
             
 
               }, function(error) {
-                  alert("Ha ocurrido un error inesperado, vuelve a intentarlo mas tarde");
+
+                  alert("Ha ocurrido un error inesperado, vuelve a intentarlo mas tarde, error("+error+")");
               });
 
           }, function(error) {
-             alert("Ha ocurrido un error inesperado, vuelve a intentarlo mas tarde");
+             alert("Ha ocurrido un error inesperado, vuelve a intentarlo mas tarde, error("+error+")");
         });
 
      },false);
@@ -196,11 +197,11 @@
              
  
               }, function(error) {
-                  alert("Ha ocurrido un error inesperado, vuelve a intentarlo mas tarde");
+                  alert("Ha ocurrido un error inesperado, vuelve a intentarlo mas tarde, error("+error+")");
               });
 
           }, function(error) {
-             alert("Ha ocurrido un error inesperado, vuelve a intentarlo mas tarde");
+             alert("Ha ocurrido un error inesperado, vuelve a intentarlo mas tarde, error("+error+")");
         });
 
      },false);
