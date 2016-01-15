@@ -16,7 +16,6 @@
     </author>
   <content src="index.html"/>
   <access origin="*"/>
-  <access origin="content:///*" />
   <allow-intent href="*"/>
   <allow-navigation href="*"/>
 
@@ -69,6 +68,7 @@
 <gap:plugin name="cordova-plugin-inappbrowser"/>
 <gap:plugin name="cordova-plugin-x-socialsharing" source="npm" />
 <gap:plugin name="cordova-plugin-whitelist" source="npm" />
+<gap:plugin name="cordova-plugin-splashscreen" source="npm" />
 
 <gap:config-file platform="android" parent="/manifest">
      <application android:debuggable="true" />
