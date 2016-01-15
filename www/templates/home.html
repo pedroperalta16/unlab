@@ -11,13 +11,13 @@
 		</div>	
 
 		<div class="padding">
-				<a href="/#/consult" class="button button-block button-dark" >CONSULTA TUS RESULTADOS</a>
+				<a href="#/consult" class="button button-block button-dark" >CONSULTA TUS RESULTADOS</a>
 				<button class="button button-block button-dark">HORARIOS</button>
 		</div>
 
 		<div class="list">
 
-			    <a class="item item-thumbnail-left item-icon-right" href="/#/news-detail/{{news.id}}" ng-repeat="news in news">
+			    <a class="item item-thumbnail-left item-icon-right" href="#/news-detail/{{news.id}}" ng-repeat="news in news">
 			    <img ng-if="news.image!=null" ng-src="{{base_url+'assets/media/news/thumb/'+news.image}}">
 			    <i class="icon icon-right ion-navicon"></i>
 			      <h2>{{news.title}}</h2>

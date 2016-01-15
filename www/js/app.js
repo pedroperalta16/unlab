@@ -92,7 +92,10 @@
                           $state.go('home');
 
 
-      }).error(function(error){
+      }).error(function(error
+
+
+        ){
           $ionicPopup.alert({
                        title: 'Fallo autenticación!',
                        template: 'Compruebe los datos de acceso y vuelva a intentarlo'+angular.toJson(error,true)
@@ -122,7 +125,7 @@
                 'lastName' : result.data.last_name,
                 'email': result.data.email
               };
-              alert(angular.toJson(login,true));
+             
 
               $.post(resourceEndPoint+"api/social/sigin",{data:login},function(res){
 
