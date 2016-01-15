@@ -74,26 +74,32 @@
 
       $ionicLoading.show({
               template: 'Cargando...'
-            });
+       });
 
-      $.post(resourceEndPoint+"api/sigin",{email:$scope.formData.email,password:$scope.formData.password},function(res){
-                    $ionicLoading.hide();
-                     localStorage.setItem("id", res.userdata.id);
-                     localStorage.setItem("name",  res.userdata.name);
-                     localStorage.setItem("lastname",  res.userdata.lastname);
-                     localStorage.setItem("email",  res.userdata.email);
-                     localStorage.setItem("img",  res.userdata.image);
-                     localStorage.setItem("logged_in", true);
-                     localStorage.setItem("token", res.token.token);
-                    $state.go('home');
 
-         }).fail(function(error){
-             $ionicPopup.alert({
-                 title: 'Fallo autenticación!',
-                 template: 'Compruebe los datos de acceso y vuelva a intentarlo'+angular.toJson(error,true)
-            });
-           $ionicLoading.hide();
-         });
+      $http.post(resourceEndPoint+"api/sigin",
+                           $.param({email:$scope.formData.email,password:$scope.formData.password}),
+                            {headers : {'Content-Type': 'application/x-www-form-urlencoded'}}).success(function(res,status){
+
+                          $ionicLoading.hide();
+                           localStorage.setItem("id", res.userdata.id);
+                           localStorage.setItem("name",  res.userdata.name);
+                           localStorage.setItem("lastname",  res.userdata.lastname);
+                           localStorage.setItem("email",  res.userdata.email);
+                           localStorage.setItem("img",  res.userdata.image);
+                           localStorage.setItem("logged_in", true);
+                           localStorage.setItem("token", res.token.token);
+                          $state.go('home');
+
+
+      }).error(function(error){
+          $ionicPopup.alert({
+                       title: 'Fallo autenticación!',
+                       template: 'Compruebe los datos de acceso y vuelva a intentarlo'+angular.toJson(error,true)
+          });
+          $ionicLoading.hide();
+      });
+
                 
     }/*end regular login*/
 

@@ -24,7 +24,7 @@ task.factory('Session',function($state,$ionicHistory){
 			 if (localStorage.getItem("token") === null) {
           		$state.go('login');
         	 }else{
-        	 	if ($ionicHistory.currentView.stateName=="login") {
+        	 	if ($ionicHistory.currentView().stateName=="login") {
         	 		$state.go('home');
         	 	};
         	 }
@@ -39,7 +39,7 @@ task.factory('Session',function($state,$ionicHistory){
 			$ionicHistory.goBack();
 		},
 		showButtons:function(){
-			if ($ionicHistory.currentView.stateName=="login"){
+			if ($ionicHistory.currentView().stateName==="login"){
 					return false;
 			}
 				
