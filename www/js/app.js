@@ -125,7 +125,7 @@
                 'email': result.data.email
               };
              
-
+              
               $.post(resourceEndPoint+"api/social/sigin",{data:login},function(res){
 
                      $ionicLoading.hide();
@@ -226,6 +226,7 @@ app.controller('HomeController',function($scope,$ionicSlideBoxDelegate,$http,$ro
 
 Session.isLoggin();
 $rootScope.showBtn = true;
+$rootScope.task=Session;
 
 $scope.base_url=resourceEndPoint;
 $scope.galleryFolder='';
@@ -291,6 +292,7 @@ app.controller('NewsController',function($scope,$state,$http,$sce,$rootScope,Ses
     var id =$state.params.id;
     $scope.base_url =resourceEndPoint;
     $rootScope.showBtn = true;
+    $rootScope.task=Session;
 
     /*cargar noticia especifica*/
     $http.get(resourceEndPoint+'api/news/'+id+'/?token='+localStorage['token']).success(function(res){
