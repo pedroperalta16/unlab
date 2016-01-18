@@ -38,13 +38,7 @@ task.factory('Session',function($state,$ionicHistory){
 		doBack:function(){
 			$ionicHistory.goBack();
 		},
-		showButtons:function(){
-			if ($ionicHistory.currentView().stateName==="login"){
-					return false;
-			}
-				
-			return true;
-		}
+		
 	}
 
 });

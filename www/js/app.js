@@ -5,7 +5,6 @@
   var resourceEndPoint="http://appunlab.comtic.co/"
 
 
-
   app.config(function($stateProvider,$urlRouterProvider){
 
     $stateProvider.state('login',{
@@ -38,11 +37,11 @@
                                             $ionicLoading,
                                             $ionicPopup,
                                             $http,
-                                            $state,
+                                            $state, 
+                                            $rootScope,
                                             Task,Session){
     Session.isLoggin();
-
-    
+    $rootScope.showBtn = false;
     $scope.hasError=false;
     $scope.error='';
     $scope.formData={email:'',password:''}
@@ -223,9 +222,11 @@
 
 });/*end login controller*/
 
-app.controller('HomeController',function($scope,$ionicSlideBoxDelegate,$http,Session){
+app.controller('HomeController',function($scope,$ionicSlideBoxDelegate,$http,$rootScope,Session){
 
 Session.isLoggin();
+$rootScope.showBtn = true;
+
 $scope.base_url=resourceEndPoint;
 $scope.galleryFolder='';
 $scope.slides=[];
@@ -284,10 +285,12 @@ $http.get(resourceEndPoint+'api/news/?token='+localStorage['token']+'&page='+$sc
 
 });
 /*controlador de noticias*/
-app.controller('NewsController',function($scope,$state,$http,$sce){
+app.controller('NewsController',function($scope,$state,$http,$sce,$rootScope,Session){
 
+    Session.isLoggin();
     var id =$state.params.id;
     $scope.base_url =resourceEndPoint;
+    $rootScope.showBtn = true;
 
     /*cargar noticia especifica*/
     $http.get(resourceEndPoint+'api/news/'+id+'/?token='+localStorage['token']).success(function(res){
@@ -333,6 +336,7 @@ app.controller("ConsultController",function($scope,$http){
 
         /*load global logout function*/
             $rootScope.task=Session;
+            $rootScope.showBtn = false;
 
       });
     });
