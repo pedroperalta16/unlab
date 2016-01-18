@@ -1,7 +1,7 @@
 'use strict';
 (function(){
 
-  var app=angular.module('unlab', ['ionic','task','ngCordovaOauth','ngSanitize']);
+  var app=angular.module('unlab', ['ionic','task','ngCordovaOauth','ngSanitize','ngCordova']);
   var resourceEndPoint="http://appunlab.comtic.co/"
 
 
@@ -288,7 +288,7 @@ $http.get(resourceEndPoint+'api/news/?token='+localStorage['token']+'&page='+$sc
 
 });
 /*controlador de noticias*/
-app.controller('NewsController',function($scope,$state,$http,$sce,$rootScope,Session){
+app.controller('NewsController',function($scope,$state,$http,$sce,$rootScope,$cordovaSocialSharing,Session){
 
     Session.isLoggin();
     var id =$state.params.id;
@@ -311,6 +311,11 @@ app.controller('NewsController',function($scope,$state,$http,$sce,$rootScope,Ses
             template: 'Fallo al cargar los sliders'
       });
   });
+
+  /*compartir articulo*/
+  $scope.share = function () {
+    $cordovaSocialSharing.share($scope.news.content, $scope.news.title, $scope.img, null);
+}
 
 });
 /*consultar resultados del laboratorio*/
