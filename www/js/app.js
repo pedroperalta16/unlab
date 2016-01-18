@@ -314,7 +314,7 @@ app.controller('NewsController',function($scope,$state,$http,$sce,$rootScope,$co
 
   /*compartir articulo*/
   $scope.share = function () {
-   $cordovaSocialSharing.share($scope.news.content, $scope.news.title, $scope.img, null);
+   $cordovaSocialSharing.share($sce.trustAsHtml($scope.news.content), $scope.news.title, $scope.img, null);
   }
 
 });
