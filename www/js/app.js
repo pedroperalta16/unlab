@@ -138,10 +138,12 @@
                      localStorage.setItem("token", res.token.token);
                      $state.go('home');
 
-               }).fail(function(){
+               }).fail(function(error){
+
+                angular.toJson(error,true)
                      $ionicPopup.alert({
                          title: 'Fallo autenticación!',
-                         template: 'Compruebe los datos de acceso y vuelva a intentarlo'
+                         template: 'Comporuebe los datos de acceso y vuelva a intentarlo'
                     });
                    $ionicLoading.hide();
              });
@@ -298,6 +300,7 @@ app.controller('NewsController',function($scope,$state,$http,$sce,$rootScope,Ses
     $http.get(resourceEndPoint+'api/news/'+id+'/?token='+localStorage['token']).success(function(res){
 
     $scope.news=res;
+    $scope.img= base_url+'assets/media/news/thumb/'+$scope.image;
     $scope.thisCanBeusedInsideNgBindHtml = $sce.trustAsHtml($scope.news.content);
 
   }).error(function(){
