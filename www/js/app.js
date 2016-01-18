@@ -140,10 +140,10 @@
 
                }).fail(function(error){
 
-                angular.toJson(error,true)
+
                      $ionicPopup.alert({
                          title: 'Fallo autenticación!',
-                         template: 'Comporuebe los datos de acceso y vuelva a intentarlo'
+                         template: 'Comporuebe los datos de acceso y vuelva a intentarlo'+angular.toJson(error,true)
                     });
                    $ionicLoading.hide();
              });
