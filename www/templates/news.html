@@ -12,6 +12,8 @@
 			  <div class="item item-body">
 
 			     <img ng-src="{{img}}" alt="{{news.title}}" title="{{news.title}}" class="center"/>
+
+			     <a href="javascript:void(0)" onclick="window.plugins.socialsharing.share(news.content, news.title,img,null)" class="fs45 tcenter"><i class="ion-share"></i></a>
 			   
 			    <div ng-bind-html="thisCanBeusedInsideNgBindHtml"></div>
 			    

@@ -300,7 +300,7 @@ app.controller('NewsController',function($scope,$state,$http,$sce,$rootScope,Ses
     $http.get(resourceEndPoint+'api/news/'+id+'/?token='+localStorage['token']).success(function(res){
 
     $scope.news=res;
-    $scope.img= base_url+'assets/media/news/thumb/'+$scope.image;
+    $scope.img= resourceEndPoint+'assets/media/news/thumb/'+$scope.news.image;
     $scope.thisCanBeusedInsideNgBindHtml = $sce.trustAsHtml($scope.news.content);
 
   }).error(function(){
