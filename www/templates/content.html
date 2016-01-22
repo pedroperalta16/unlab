@@ -1,0 +1,18 @@
+ <ion-view view-title="Laboratorio clinico unlab" ng-controller="ScheduleController">
+    <ion-content class="has-header has-footer">
+      	<div class="item item-body tcenter">
+    		<h2>Horarios</h2>
+		</div>
+		<div class="schedules" ng-repeat="schedule in schedules">
+			<a href="#" class="item item-icon-right" ng-click="toggleExpand(schedule.id)">
+				<i class="icon ion-arrow-expand"></i>
+				{{schedule.title}}
+			</a>
+				<div class="item item-text-wrap"  ng-show="expand==schedule.id" ng-hide="expand!=schedule.id">
+					<div ng-bind-html="schedule.content"></div>
+				</div>
+		</div>
+		<ion-infinite-scroll on-infinite="loadMore()" distance="1%" ng-if="hasContent"></ion-infinite-scroll>
+		
+    </ion-content>
+  </ion-view>

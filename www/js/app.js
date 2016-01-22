@@ -23,6 +23,10 @@
       url:'/consult',
       templateUrl:'templates/consult.html'
     });
+    $stateProvider.state('content',{
+      url:'/content',
+      templateUrl:'templates/content.html'
+    });
 
 
     $urlRouterProvider.otherwise('/login');
@@ -224,7 +228,7 @@
 
 });/*end login controller*/
 
-app.controller('HomeController',function($scope,$ionicSlideBoxDelegate,$http,$rootScope,Session){
+app.controller('HomeController',function($scope,$ionicSlideBoxDelegate,$http,$rootScope,$ionicPopup,Session){
 
 Session.isLoggin();
 $rootScope.showBtn = true;
@@ -265,7 +269,7 @@ $http.get(resourceEndPoint+'api/news/?token='+localStorage['token']+'&page='+$sc
 
    $ionicPopup.alert({
           title: 'Fallo!',
-          template: 'Fallo al cargar los sliders'
+          template: 'Fallo al cargar las noticias'
     });
 });
 
@@ -288,7 +292,7 @@ $http.get(resourceEndPoint+'api/news/?token='+localStorage['token']+'&page='+$sc
 
 });
 /*controlador de noticias*/
-app.controller('NewsController',function($scope,$state,$http,$sce,$rootScope,$cordovaSocialSharing,Session){
+app.controller('NewsController',function($scope,$state,$http,$sce,$rootScope,$ionicPopup,$cordovaSocialSharing,Session){
 
     Session.isLoggin();
     var id =$state.params.id;
@@ -323,6 +327,54 @@ app.controller("ConsultController",function($scope,$http){
  $scope.formData={number:'',password:''}
  $scope.hasError=false;
  $scope.error='';
+
+});
+/*controlador de horarios*/
+app.controller("ScheduleController",function($scope,$ionicSlideBoxDelegate,$sce,$http,$rootScope,$ionicPopup,Session){
+
+  Session.isLoggin();
+  $rootScope.showBtn = true;
+  $rootScope.task=Session;
+  $scope.schedules=[];
+  $scope.pageContent=0;
+  $scope.hasContent=true;
+
+  /*cargar horarios*/
+$http.get(resourceEndPoint+'api/content/?token='+localStorage['token']+'&page='+$scope.pageContent+'&type=3').success(function(res){
+
+  $scope.schedules=res;
+
+}).error(function(){
+    $scope.hasContent=false;
+
+   $ionicPopup.alert({
+          title: 'Fallo!',
+          template: 'Fallo al cargar los horarios'
+    });
+});
+
+  $scope.loadMore = function() {
+    $scope.pageContent++;
+    
+      $http.get(resourceEndPoint+'api/content/?token='+localStorage['token']+'&page='+$scope.pageContent+'&type=3').success(function(items) {
+       
+          
+          angular.forEach(items,function(v){
+              $scope.schedules.push(v);
+          });
+
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+      }).error(function(){
+           $scope.hasContent=false;
+      });
+
+    };
+  
+  /*abre y cierra caja*/
+  $scope.expand = 0;
+  $scope.toggleExpand = function(id) {
+      $scope.expand = id;
+  };
 
 });
 
