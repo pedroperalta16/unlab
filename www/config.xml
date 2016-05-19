@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget 
+<widget
     id="com.vinfo.unlab"
     version="0.0.1"
     versionCode="1"
@@ -16,6 +16,7 @@
     </author>
   <content src="index.html"/>
   <access origin="*"/>
+  <access origin="*.pushwoosh.com"/>
   <allow-intent href="*"/>
   <allow-navigation href="*"/>
 
@@ -27,6 +28,7 @@
   <preference name="BackupWebStorage" value="none"/>
   <preference name="SplashScreen" value="screen" />
   <preference name="SplashScreenDelay" value="3000"/>
+  <preference name="android-build-tool" value="gradle" />
 
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
@@ -81,7 +83,7 @@
   <gap:splash gap:platform="android" gap:qualifier="land-xxhdpi" src="resources/android/splash/drawable-land-xxhdpi-screen.png" />
   <gap:splash gap:platform="android" gap:qualifier="land-xxxhdpi" src="resources/android/splash/drawable-land-xxxhdpi-screen.png" />
 
- 
+
   <gap:splash src="resources/ios/iphone4/Default.png" gap:platform="ios" width="320" height="480" />
   <gap:splash src="resources/ios/iphone4/Default@2x.png" gap:platform="ios" width="640" height="960" />
   <gap:splash src="resources/ios/iphone5/Default-568h@2x.png" gap:platform="ios" width="640" height="1136" />
@@ -99,6 +101,7 @@
 <gap:plugin name="cordova-plugin-x-socialsharing" source="npm" />
 <gap:plugin name="cordova-plugin-whitelist" source="npm" />
 <gap:plugin name="cordova-plugin-splashscreen" source="npm" />
+<gap:plugin name="pushwoosh-pgb-plugin" source="npm" />
 
 <gap:config-file platform="android" parent="/manifest">
      <application android:debuggable="true" />

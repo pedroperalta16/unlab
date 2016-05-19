@@ -33,6 +33,14 @@
 
   });
 
+/*init pushwoosh*/
+app.run(function($ionicPlatform) {
+
+  ionic.Platform.ready(function(){
+     if(ionic.Platform.isAndroid()) initPushwooshANDROID('unlab-1182','10131-5FBF2');
+     if(ionic.Platform.isIOS()) initPushwooshIOS('10131-5FBF2');
+  });
+});
    /*
     *controladro para autenticar el usuario  en el sistema
     */
@@ -41,7 +49,7 @@
                                             $ionicLoading,
                                             $ionicPopup,
                                             $http,
-                                            $state, 
+                                            $state,
                                             $rootScope,
                                             Task,Session){
     Session.isLoggin();
@@ -52,7 +60,7 @@
 
     /*regular login*/
     $scope.login=function(){
-      
+
 
       if($scope.email!=""){
 
@@ -106,10 +114,10 @@
           $ionicLoading.hide();
       });
 
-                
+
     }/*end regular login*/
 
-    
+
     /*login con facebook*/
   $scope.facebookLogin = function() {
     document.addEventListener("deviceready", function () {
@@ -120,7 +128,7 @@
             });
 
            $http.get("https://graph.facebook.com/v2.2/me", {params: { access_token: result.access_token, fields: "id,first_name,last_name,email,picture", format: "json" }}).then(function(result) {
-                 
+
               var login ={
                 'identifier' : result.data.id,
                 'firstName': result.data.first_name,
@@ -128,8 +136,8 @@
                 'lastName' : result.data.last_name,
                 'email': result.data.email
               };
-             
-              
+
+
               $.post(resourceEndPoint+"api/social/sigin",{data:login},function(res){
 
                      $ionicLoading.hide();
@@ -151,7 +159,7 @@
                     });
                    $ionicLoading.hide();
              });
-            
+
 
               }, function(error) {
 
@@ -173,14 +181,14 @@
     document.addEventListener("deviceready", function () {
 
          $cordovaOauth.google("300274685250-j35fcbdbo8hu8i3oh90dqovfub762uen.apps.googleusercontent.com", ["https://www.googleapis.com/auth/urlshortener", "https://www.googleapis.com/auth/userinfo.email"]).then(function(result) {
-            
+
            //navigator.notification.activityStart('Espere por favor','Cargando');
            $ionicLoading.show({
               template: 'Cargando...'
             });
 
            $http.get("https://www.googleapis.com/plus/v1/people/me", {params: { access_token: result.access_token }}).then(function(result) {
-                 
+
               var login ={
                     'identifier' :result.data.id,
                     'firstName': result.data.name.givenName,
@@ -188,10 +196,10 @@
                     'lastName' : result.data.name.familyName,
                     'email': result.data.emails[0].value
                   };
-              
+
 
                 $.post(resourceEndPoint+"api/social/sigin",{data:login},function(res){
-                        
+
                         $ionicLoading.hide();
                         localStorage.setItem("id", res.userdata.id);
                         localStorage.setItem("name",  res.userdata.name);
@@ -209,9 +217,9 @@
                       });
                      $ionicLoading.hide();
                  });
-                
-             
- 
+
+
+
               }, function(error) {
                   alert("Ha ocurrido un error inesperado, vuelve a intentarlo mas tarde, error("+angular.toJson(error,true)+")");
                   $ionicLoading.hide();
@@ -275,10 +283,10 @@ $http.get(resourceEndPoint+'api/news/?token='+localStorage['token']+'&page='+$sc
 
   $scope.loadMore = function() {
     $scope.pageNews++;
-    
+
       $http.get(resourceEndPoint+'api/news/?token='+localStorage['token']+'&page='+$scope.pageNews++).success(function(items) {
-       
-          
+
+
           angular.forEach(items,function(v){
               $scope.news.push(v);
           });
@@ -355,10 +363,10 @@ $http.get(resourceEndPoint+'api/content/?token='+localStorage['token']+'&page='+
 
   $scope.loadMore = function() {
     $scope.pageContent++;
-    
+
       $http.get(resourceEndPoint+'api/content/?token='+localStorage['token']+'&page='+$scope.pageContent+'&type=3').success(function(items) {
-       
-          
+
+
           angular.forEach(items,function(v){
               $scope.schedules.push(v);
           });
@@ -369,7 +377,7 @@ $http.get(resourceEndPoint+'api/content/?token='+localStorage['token']+'&page='+
       });
 
     };
-  
+
   /*abre y cierra caja*/
   $scope.expand = 0;
   $scope.toggleExpand = function(id) {
@@ -404,4 +412,3 @@ $http.get(resourceEndPoint+'api/content/?token='+localStorage['token']+'&page='+
     });
 
 }());
-
