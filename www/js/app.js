@@ -1,7 +1,7 @@
 'use strict';
 (function(){
 
-  var app=angular.module('unlab', ['ionic','task','ngCordovaOauth','ngSanitize','ngCordova']);
+  var app=angular.module('unlab', ['ionic','task','ngCordovaOauth','ngSanitize','ngCordova','pushwoosh']);
   var resourceEndPoint="http://appunlab.comtic.co/"
 
 
@@ -32,7 +32,7 @@
     $urlRouterProvider.otherwise('/login');
 
   });
-  app.run(function($ionicPlatform){
+  app.run(function($ionicPlatform,PushWoosh){
 
     $ionicPlatform.ready(function() {
         PushWoosh.init("10131-5FBF2>", "300274685250").then(
