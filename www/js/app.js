@@ -241,6 +241,7 @@ $scope.pageNews=0;
 $scope.hasNews=true;
 
 ionic.Platform.ready(function(){
+  alert(ionic.Platform.isAndroid());
    if(ionic.Platform.isAndroid()) initPushwooshANDROID('unlab-1182','10131-5FBF2');
    if(ionic.Platform.isIOS()) initPushwooshIOS('10131-5FBF2');
 });
