@@ -32,6 +32,7 @@
     $urlRouterProvider.otherwise('/login');
 
   });
+
   app.run(function($ionicPlatform,PushWoosh){
 
     $ionicPlatform.ready(function() {
@@ -44,16 +45,19 @@
               function(token) {
                 $scope.deviceToken = token;
                 console.log("Dispositivo registrado");
+                alert(token);
               },
               // Registro Error
               function(err) {
                 console.log(err);
+                alert(err)
               }
             );
           },
           // Init error
           function(err) {
             console.log("Error al inicializar PushWoosh " + err);
+              alert("Error al inicializar PushWoosh " + err)
           }
 
         );
