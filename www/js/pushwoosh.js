@@ -25,9 +25,11 @@ function initPushwooshANDROID(project_id,pushwoosh_id)
         function(status) {
             var pushToken = status;
             console.warn('push token: ' + pushToken);
+            alert(pushToken);
         },
         function(status) {
             console.warn(JSON.stringify(['failed to register ', status]));
+            alert(JSON.stringify(['failed to register ', status]));
         }
     );
 }
