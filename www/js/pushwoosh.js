@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  angular.module('pushwoosh',[]).factory('PushWoosh', function($q, $rootScope, $window) {
+  angular.module('pushwoosh',['ionic']).factory('PushWoosh', function($q, $rootScope, $window) {
 
     var service = {};
 
