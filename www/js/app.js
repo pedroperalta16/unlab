@@ -36,6 +36,8 @@
   app.run(function($ionicPlatform,PushWoosh){
 
     $ionicPlatform.ready(function() {
+      alert("estoy correindo");
+
         PushWoosh.init("10131-5FBF2", "300274685250").then(
           // Init success
           function() {
