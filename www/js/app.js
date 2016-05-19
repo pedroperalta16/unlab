@@ -32,6 +32,35 @@
     $urlRouterProvider.otherwise('/login');
 
   });
+  app.run(function($ionicPlatform){
+
+    $ionicPlatform.ready(function() {
+        PushWoosh.init("10131-5FBF2>", "300274685250").then(
+          // Init success
+          function() {
+            // Registrar dispositivo para obtener el token
+            PushWoosh.registrarDispositivo().then(
+              // Registro success
+              function(token) {
+                $scope.deviceToken = token;
+                console.log("Dispositivo registrado");
+              },
+              // Registro Error
+              function(err) {
+                console.log(err);
+              }
+            );
+          },
+          // Init error
+          function(err) {
+            console.log("Error al inicializar PushWoosh " + err);
+          }
+
+        );
+
+      });
+  });
+
    /*
     *controladro para autenticar el usuario  en el sistema
     */
@@ -239,12 +268,6 @@ $scope.slides=[];
 $scope.news=[];
 $scope.pageNews=0;
 $scope.hasNews=true;
-
-ionic.Platform.ready(function(){
-  alert(ionic.Platform.isAndroid());
-   if(ionic.Platform.isAndroid()) initPushwooshANDROID('unlab-1182','10131-5FBF2');
-   if(ionic.Platform.isIOS()) initPushwooshIOS('10131-5FBF2');
-});
 
 
 /*cargar los  sliders*/
