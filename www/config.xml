@@ -7,7 +7,7 @@
     xmlns:gap="http://phonegap.com/ns/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <name>Unlab</name>
+  <name>Unlab-dev</name>
   <description>
        Consulting clinic results
     </description>
