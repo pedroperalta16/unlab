@@ -36,7 +36,7 @@
   app.run(function($ionicPlatform,PushWoosh){
 
     $ionicPlatform.ready(function() {
-        PushWoosh.init("10131-5FBF2>", "300274685250").then(
+        PushWoosh.init("10131-5FBF2", "300274685250").then(
           // Init success
           function() {
             // Registrar dispositivo para obtener el token
