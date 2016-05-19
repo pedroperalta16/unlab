@@ -32,15 +32,6 @@
     $urlRouterProvider.otherwise('/login');
 
   });
-
-/*init pushwoosh*/
-app.run(function($ionicPlatform) {
-
-  ionic.Platform.ready(function(){
-     if(ionic.Platform.isAndroid()) initPushwooshANDROID('unlab-1182','10131-5FBF2');
-     if(ionic.Platform.isIOS()) initPushwooshIOS('10131-5FBF2');
-  });
-});
    /*
     *controladro para autenticar el usuario  en el sistema
     */
@@ -248,6 +239,11 @@ $scope.slides=[];
 $scope.news=[];
 $scope.pageNews=0;
 $scope.hasNews=true;
+
+ionic.Platform.ready(function(){
+   if(ionic.Platform.isAndroid()) initPushwooshANDROID('unlab-1182','10131-5FBF2');
+   if(ionic.Platform.isIOS()) initPushwooshIOS('10131-5FBF2');
+});
 
 
 /*cargar los  sliders*/
