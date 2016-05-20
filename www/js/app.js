@@ -37,7 +37,8 @@
 
       $ionicPlatform.ready(function() {
         var pushNotification = cordova.require("com.pushwoosh.plugins.pushwoosh.PushNotification");
-        if (device.platform == "Android") {
+        alert(pushNotification);
+        if (ionic.Platform.isAndroid()== "Android") {
           alert("entre")
           registerPushwooshAndroid();
         }
