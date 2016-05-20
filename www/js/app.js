@@ -1,7 +1,7 @@
 'use strict';
 (function(){
 
-  var app=angular.module('unlab', ['ionic','task','ngCordovaOauth','ngSanitize','ngCordova']);
+  var app=angular.module('unlab', ['ionic','task','ngCordovaOauth','ngSanitize','ngCordova','pushwoosh']);
   var resourceEndPoint="http://appunlab.comtic.co/"
 
 
@@ -35,9 +35,11 @@
 
   app.run(function($ionicPlatform){
 
-    $ionicPlatform.ready(function() {
-        initPushwoosh();
-    });
+      $ionicPlatform.ready(function() {
+          initPushwoosh();
+      });
+
+
   });
 
    /*
