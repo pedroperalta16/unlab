@@ -1,7 +1,7 @@
 'use strict';
 (function(){
 
-  var app=angular.module('unlab', ['ionic','task','ngCordovaOauth','ngSanitize','ngCordova','pushwoosh']);
+  var app=angular.module('unlab', ['ionic','task','ngCordovaOauth','ngSanitize','ngCordova']);
   var resourceEndPoint="http://appunlab.comtic.co/"
 
 
@@ -33,38 +33,11 @@
 
   });
 
-  app.run(function($ionicPlatform,PushWoosh){
+  app.run(function($ionicPlatform){
 
     $ionicPlatform.ready(function() {
-      alert("estoy correindo");
-
-        PushWoosh.init("10131-5FBF2", "300274685250").then(
-          // Init success
-          function() {
-            // Registrar dispositivo para obtener el token
-            PushWoosh.registrarDispositivo().then(
-              // Registro success
-              function(token) {
-                $scope.deviceToken = token;
-                console.log("Dispositivo registrado");
-                alert(token);
-              },
-              // Registro Error
-              function(err) {
-                console.log(err);
-                alert(err)
-              }
-            );
-          },
-          // Init error
-          function(err) {
-            console.log("Error al inicializar PushWoosh " + err);
-              alert("Error al inicializar PushWoosh " + err)
-          }
-
-        );
-
-      });
+        initPushwoosh();
+    });
   });
 
    /*
