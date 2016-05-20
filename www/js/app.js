@@ -1,7 +1,7 @@
 'use strict';
 (function(){
 
-  var app=angular.module('unlab', ['ionic','task','ngCordovaOauth','ngSanitize','ngCordova','pushwoosh']);
+  var app=angular.module('unlab', ['ionic','task','ngCordovaOauth','ngSanitize','ngCordova']);
   var resourceEndPoint="http://appunlab.comtic.co/"
 
 
