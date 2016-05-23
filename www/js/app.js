@@ -33,38 +33,6 @@
 
   });
 
-  app.run(function($ionicPlatform){
-
-      $ionicPlatform.ready(function() {
-        var pushNotification = cordova.require("com.pushwoosh.plugins.pushwoosh.PushNotification");
-        alert(pushNotification);
-        if (ionic.Platform.isAndroid()) {
-          alert("entre")
-          registerPushwooshAndroid();
-        }
-
-        if (device.platform == "iPhone" || device.platform == "iOS") {
-          registerPushwooshIOS();
-        }
-
-        if (device.platform == "Win32NT") {
-          registerPushwooshWP();
-        }
-
-        pushNotification.getLaunchNotification(
-          function(notification) {
-            if (notification != null) {
-              alert(JSON.stringify(notification));
-            } else {
-              alert("No launch notification");
-            }
-          }
-        );
-      });
-
-
-  });
-
    /*
     *controladro para autenticar el usuario  en el sistema
     */
