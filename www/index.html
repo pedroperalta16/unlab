@@ -21,7 +21,12 @@
     <script type="text/javascript" src="js/PushwooshiOS.js"></script>
     <script type="text/javascript" src="js/PushwooshWP.js"></script>
     <script>
-      initPushwoosh();
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady() {
+    initPushwoosh();
+}
+     
     </script>
   </head>
   <body ng-app="unlab">
