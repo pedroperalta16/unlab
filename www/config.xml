@@ -15,7 +15,6 @@
       Andres Arbelaez Acevedo
     </author>
   <content src="index.html"/>
-  <access origin="*"/>
   <access origin="*.pushwoosh.com"/>
   <allow-intent href="*"/>
   <allow-navigation href="*"/>
@@ -102,6 +101,8 @@
 <gap:plugin name="cordova-plugin-whitelist" source="npm" />
 <gap:plugin name="cordova-plugin-splashscreen" source="npm" />
 <gap:plugin name="pushwoosh-pgb-plugin" source="npm" />
+<gap:plugin name="pushwoosh-cordova-plugin" source="npm" />
+
 
 <gap:config-file platform="android" parent="/manifest">
      <application android:debuggable="true" />
