@@ -132,7 +132,7 @@
                 'photoURL' : result.data.picture.data.url,
                 'lastName' : result.data.last_name,
                 'email': result.data.email,
-                'device': localStorage.getItem("device");
+                'device': localStorage.getItem("device")
               };
 
 
@@ -193,7 +193,7 @@
                     'photoURL' : result.data.image.url,
                     'lastName' : result.data.name.familyName,
                     'email': result.data.emails[0].value,
-                    'device': localStorage.getItem("device");
+                    'device': localStorage.getItem("device")
                   };
 
 
