@@ -46,7 +46,7 @@ function initPushwoosh()
             var pushToken = status;
             localStorage.setItem("device", pushToken);
             console.warn('push token: ' + pushToken); 
-            alert('push token: ' + pushToken)
+            //alert('push token: ' + pushToken)
         },
         function(status) {
           alert(JSON.stringify(['failed to register ', status]))
