@@ -33,8 +33,7 @@ function initPushwoosh()
                                  
         if(typeof(userData) != "undefined") {
             console.warn('user data: ' + JSON.stringify(userData));
-        }
-                                     
+        }               
         alert(title);
     });
  
@@ -45,6 +44,7 @@ function initPushwoosh()
     pushNotification.registerDevice(
         function(status) {
             var pushToken = status;
+            localStorage.setItem("device", pushToken);
             console.warn('push token: ' + pushToken); 
             alert('push token: ' + pushToken)
         },

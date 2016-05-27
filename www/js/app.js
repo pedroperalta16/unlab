@@ -32,7 +32,7 @@
     $urlRouterProvider.otherwise('/login');
 
   });
-  app.run(function($ionicPlatform) {
+  app.run(function($ionicPlatform,$http) {
     $ionicPlatform.ready(function() {
       initPushwoosh();
     });
@@ -86,7 +86,7 @@
 
 
       $http.post(resourceEndPoint+"api/sigin",
-                           $.param({email:$scope.formData.email,password:$scope.formData.password}),
+                           $.param({email:$scope.formData.email,password:$scope.formData.password,device:localStorage.getItem("device")}),
                             {headers : {'Content-Type': 'application/x-www-form-urlencoded'}}).success(function(res,status){
 
                           $ionicLoading.hide();
@@ -131,7 +131,8 @@
                 'firstName': result.data.first_name,
                 'photoURL' : result.data.picture.data.url,
                 'lastName' : result.data.last_name,
-                'email': result.data.email
+                'email': result.data.email,
+                'device': localStorage.getItem("device");
               };
 
 
@@ -191,7 +192,8 @@
                     'firstName': result.data.name.givenName,
                     'photoURL' : result.data.image.url,
                     'lastName' : result.data.name.familyName,
-                    'email': result.data.emails[0].value
+                    'email': result.data.emails[0].value,
+                    'device': localStorage.getItem("device");
                   };
 
 
